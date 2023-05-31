@@ -17,7 +17,7 @@ import { ProjectContext } from "../../project/types.ts";
 import { TempContext } from "../../core/temp-types.ts";
 import { ExtensionContext } from "../../extension/types.ts";
 import { kPositionedRefs } from "../../config/constants.ts";
-import { NotebookContext } from "../../quarto-core/notebook/notebook-types.ts";
+import { NotebookContext } from "../../render/notebook/notebook-types.ts";
 import { Lifetime } from "../../core/lifetimes.ts";
 
 // options for render
@@ -62,7 +62,9 @@ export interface RunPandocResult {
   inputTraits: PandocInputTraits;
   resources: string[];
   postprocessors?: Array<
-    (output: string) => Promise<{ supporting: string[] } | void>
+    (
+      output: string,
+    ) => Promise<{ supporting: string[]; resources?: string[] } | void>
   >;
   htmlPostprocessors: Array<HtmlPostProcessor>;
   htmlFinalizers?: Array<(doc: Document) => Promise<void>>;

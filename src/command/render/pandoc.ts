@@ -317,7 +317,9 @@ export async function runPandoc(
 
   // see if there are extras
   const postprocessors: Array<
-    (output: string) => Promise<{ supporting: string[] } | void>
+    (
+      output: string,
+    ) => Promise<{ supporting: string[]; resources?: string[] } | void>
   > = [];
   const htmlPostprocessors: Array<HtmlPostProcessor> = [];
   const htmlFinalizers: Array<(doc: Document) => Promise<void>> = [];
